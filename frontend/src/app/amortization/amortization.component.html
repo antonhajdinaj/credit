@@ -1,0 +1,29 @@
+Rows: {{monthDetails.length}}
+<div class="mat-elevation-z8">
+  <mat-table [dataSource]="monthDetails">
+
+    <ng-container matColumnDef="totalRemainingAmount">
+      <mat-header-cell *matHeaderCellDef> Montant restant dû</mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.totalRemainingAmount | currency:'EUR'}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="term">
+      <mat-header-cell *matHeaderCellDef> Echéance</mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.term | currency: 'EUR'}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="interests">
+      <mat-header-cell *matHeaderCellDef> Intérets</mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.interests | currency:'EUR'}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="actuarialRate">
+      <mat-header-cell *matHeaderCellDef>Taux actuariel</mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.actuarialRate}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="capital">
+      <mat-header-cell *matHeaderCellDef>Capital</mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.capital | currency:'EUR'}} </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+</div>

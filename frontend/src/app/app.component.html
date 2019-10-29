@@ -1,0 +1,27 @@
+<mat-card>
+  <form [formGroup]="formGroup">
+
+    <mat-form-field fxLayout="row">
+      <mat-label>Montant du crédit</mat-label>
+      <input matInput formControlName="amount" type="number" [min]="0" [step]="10000">
+      <span matSuffix>€</span>
+    </mat-form-field>
+    <mat-form-field fxLayout="row">
+      <mat-label>Taux</mat-label>
+      <input matInput formControlName="rate" type="number" [min]="0" [step]="0.1">
+      <span matSuffix>%</span>
+    </mat-form-field>
+    <mat-form-field fxLayout="row">
+      <mat-label>Nombre d'années</mat-label>
+      <input matInput formControlName="years" type="number" [min]="0">
+      <span matSuffix>ans</span>
+    </mat-form-field>
+    <div>
+      <button mat-raised-button color="primary" (click)="calculate()">Calculer</button>
+    </div>
+  </form>
+</mat-card>
+
+<mat-card *ngIf="monthDetails">
+  <app-amortization [monthDetails]="monthDetails"></app-amortization>
+</mat-card>
