@@ -21,7 +21,17 @@
     </div>
   </form>
 </mat-card>
+<mat-card *ngIf="creditDetails" fxLayout="row" fxLayoutGap="2.5%">
+  <mat-form-field fxFlex="20">
+    <mat-label>Montant total remboursé</mat-label>
+    <input matInput [value]="creditDetails.totalPaid | currency:'EUR'">
+  </mat-form-field>
+  <mat-form-field fxFlex="20">
+    <mat-label>Montant total intérêts</mat-label>
+    <input matInput [value]="creditDetails.totalInterests | currency:'EUR'">
+  </mat-form-field>
 
+</mat-card>
 <mat-card *ngIf="monthDetails">
   <app-amortization [monthDetails]="monthDetails"></app-amortization>
 </mat-card>

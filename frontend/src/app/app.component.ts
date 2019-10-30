@@ -1,11 +1,15 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
 
+export interface CreditDetails {
+  totalPaid: number;
+  totalInterests: number;
+}
+
 export interface MonthDetails {
   year: number;
   totalRemainingAmount: number;
   interests: number;
-  interestRate: number;
   actuarialRate: number;
   capital: number;
   term: number;
@@ -23,6 +27,7 @@ export class AppComponent implements OnInit {
 
   formGroup: FormGroup;
 
+  creditDetails: CreditDetails;
   monthDetails: MonthDetails[];
 
   constructor(private formBuilder: FormBuilder) {
@@ -42,28 +47,32 @@ export class AppComponent implements OnInit {
   calculate() {
     this.monthDetails = [];
     const totalMonths = this.years * 12;
-    let totalPaid = 0;
+    let totalCapitalPaid = 0;
     for (let i = 0; i < totalMonths; i++) {
-      const monthlyInterest = this.rate / 12 / 100;
-      const term = (this.amount * monthlyInterest) / (1 - Math.pow(1 + monthlyInterest, 0 - totalMonths));
-      const interests = (this.amount - totalPaid) * monthlyInterest;
-      const actuarialRate = Math.pow(1 + this.rate, 1 / 12) - 1;
-      const capital = term - interests;
-      totalPaid += capital;
+      const yearlyRate = this.rate / 100;
+      const monthlyInterestRate = yearlyRate / 12;
+      const term = (this.amount * monthlyInterestRate) / (1 - Math.pow(1 + monthlyInterestRate, 0 - totalMonths)); // échéance
+      const interests = (this.amount - totalCapitalPaid) * monthlyInterestRate; // montant intérêts du mois
+      const actuarialRate = Math.pow(1 + this.rate, 1 / 12) - 1; // taux actuariel
+      const capital = term - interests; // capital remboursé pour ce mois
+      totalCapitalPaid += capital;
 
       this.monthDetails.push(
         {
-          interestRate: monthlyInterest,
           interests,
           capital,
           actuarialRate,
           term,
-          totalRemainingAmount: this.amount - totalPaid,
+          totalRemainingAmount: this.amount - totalCapitalPaid,
           monthlyAmount: capital + interests,
           year: 0
         }
       );
     }
+    this.creditDetails = {
+      totalInterests: this.monthDetails.map(m => m.interests).reduce((sum, current) => sum + current),
+      totalPaid: this.monthDetails.map(m => m.term).reduce((sum, current) => sum + current)
+    };
   }
 
   get rate() {
