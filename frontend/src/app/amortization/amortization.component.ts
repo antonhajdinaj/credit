@@ -13,7 +13,7 @@ export class AmortizationComponent implements OnInit {
 
   totalInterests: number;
 
-  readonly displayedColumns: string[] = ['totalRemainingAmount', 'interests', 'capital', 'actuarialRate', 'term'];
+  readonly displayedColumns: string[] = ['totalRemainingAmount', 'interests', 'capital', 'term'];
 
   constructor() {
   }

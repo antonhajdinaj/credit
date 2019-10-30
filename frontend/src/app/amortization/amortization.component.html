@@ -13,10 +13,6 @@
       <mat-header-cell *matHeaderCellDef> Intérets</mat-header-cell>
       <mat-cell *matCellDef="let element"> {{element.interests | currency:'EUR'}} </mat-cell>
     </ng-container>
-    <ng-container matColumnDef="actuarialRate">
-      <mat-header-cell *matHeaderCellDef>Taux actuariel</mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.actuarialRate}} </mat-cell>
-    </ng-container>
     <ng-container matColumnDef="capital">
       <mat-header-cell *matHeaderCellDef>Capital</mat-header-cell>
       <mat-cell *matCellDef="let element"> {{element.capital | currency:'EUR'}} </mat-cell>

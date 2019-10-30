@@ -30,6 +30,10 @@
     <mat-label>Montant total intérêts</mat-label>
     <input matInput [value]="creditDetails.totalInterests | currency:'EUR'">
   </mat-form-field>
+  <mat-form-field fxFlex="20">
+    <mat-label>Taux actuariel</mat-label>
+    <input matInput [value]="creditDetails.actuarialRate">
+  </mat-form-field>
 
 </mat-card>
 <mat-card *ngIf="monthDetails">
