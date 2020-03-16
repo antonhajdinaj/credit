@@ -1,6 +1,16 @@
 <div class="mat-elevation-z8">
   <mat-table [dataSource]="monthDetails">
 
+    <ng-container matColumnDef="count">
+      <mat-header-cell *matHeaderCellDef> Nᵒ</mat-header-cell>
+      <mat-cell *matCellDef="let element; let i = index">
+        {{i}} <span class="year mat-body-strong" *ngIf="i>11 && i % 12 == 0"> ({{i / 12}} {{i / 12 > 1 ? 'ans' : 'an'}})</span>
+      </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="date">
+      <mat-header-cell *matHeaderCellDef> Date</mat-header-cell>
+      <mat-cell *matCellDef="let element; let i = index"> {{element.date | date:'MM/yyyy'}} </mat-cell>
+    </ng-container>
     <ng-container matColumnDef="totalRemainingAmount">
       <mat-header-cell *matHeaderCellDef> Montant restant dû</mat-header-cell>
       <mat-cell *matCellDef="let element"> {{element.totalRemainingAmount | currency:'EUR'}} </mat-cell>

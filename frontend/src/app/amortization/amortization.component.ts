@@ -13,13 +13,12 @@ export class AmortizationComponent implements OnInit {
 
   totalInterests: number;
 
-  readonly displayedColumns: string[] = ['totalRemainingAmount', 'interests', 'capital', 'term'];
+  readonly displayedColumns: string[] = ['count', 'date', 'totalRemainingAmount', 'interests', 'capital', 'term'];
 
   constructor() {
   }
 
   ngOnInit() {
-
     this.totalInterests = this.monthDetails.map(m => m.interests).reduce((sum, current) => sum + current);
     console.log(this.totalInterests);
     console.log(this.monthDetails.map(m => m.capital).reduce((sum, current) => sum + current));

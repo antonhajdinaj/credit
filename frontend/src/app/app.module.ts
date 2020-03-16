@@ -15,7 +15,7 @@ import {MatTableModule} from '@angular/material/table';
 @NgModule({
   declarations: [
     AppComponent,
-    AmortizationComponent
+    AmortizationComponent,
   ],
   imports: [
     BrowserModule,

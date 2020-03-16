@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
+import * as moment from 'moment';
 
 export interface CreditDetails {
   totalPaid: number;
@@ -14,6 +15,7 @@ export interface MonthDetails {
   capital: number;
   term: number;
   monthlyAmount: number;
+  date: Date;
 
 }
 
@@ -52,7 +54,6 @@ export class AppComponent implements OnInit {
     const yearlyRate = this.rate / 100;
     const monthlyInterestRate = yearlyRate / 12;
     const term = (this.amount * monthlyInterestRate) / (1 - Math.pow(1 + monthlyInterestRate, 0 - totalMonths)); // échéance
-
     for (let i = 0; i < totalMonths; i++) {
       const interests = (this.amount - totalCapitalPaid) * monthlyInterestRate; // montant intérêts du mois
       const capital = term - interests; // capital remboursé pour ce mois
@@ -65,7 +66,8 @@ export class AppComponent implements OnInit {
           term,
           totalRemainingAmount: this.amount - totalCapitalPaid,
           monthlyAmount: capital + interests,
-          year: 0
+          year: 0,
+          date: moment().add(i, 'month').toDate()
         }
       );
     }
